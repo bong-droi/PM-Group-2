@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technical Dashboard</title>
+  <link rel="stylesheet" href="/static/css/ekgis-theme.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">T</div>
+        <div>
+          <p class="brand-title">Dashboard Kỹ thuật</p>
+          <p class="brand-subtitle">Xử lý hiện trường, bảo trì tài sản và cập nhật trạng thái</p>
+        </div>
+      </div>
+      <div class="role-nav-wrap">
+        <button class="role-nav-btn role-nav-active" data-section="overview" type="button">Trang chủ tổng quan</button>
+        <button class="role-nav-btn" data-section="incidents" type="button">Cập nhật sự cố</button>
+        <button class="role-nav-btn" data-section="logs" type="button">Nhật ký bảo trì</button>
+        <button id="logout-btn" class="btn btn-danger">Đăng xuất</button>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+      <section id="overview-section" class="container">
+      <section class="flat-section">
+          <h2 class="flat-title">Trang chủ tổng quan</h2>
+          <p id="welcome-text" class="flat-note">Đang tải dữ liệu người dùng...</p>
+          <div class="flat-stats">
+            <div class="flat-stat">
+              <p>Yêu cầu được giao</p>
+              <p id="metric-assigned" class="v">0</p>
+            </div>
+            <div class="flat-stat">
+              <p>Đang xử lý</p>
+              <p id="metric-processing" class="v">0</p>
+            </div>
+            <div class="flat-stat">
+              <p>Đã hoàn thành</p>
+              <p id="metric-completed" class="v">0</p>
+            </div>
+          </div>
+      </section>
+      </section>
+
+      <section id="incidents-section" class="container hidden" style="margin-top: 16px;">
+        <section class="flat-section">
+          <h3 class="flat-title">Cập nhật trạng thái sửa chữa</h3>
+          <p class="flat-note">Cập nhật tiến độ sự cố: chưa xử lý, đang xử lý, đã hoàn thành.</p>
+          <div id="technical-incident-list" class="stack"></div>
+        </section>
+      </section>
+
+      <section id="logs-section" class="container hidden" style="margin-top: 16px;">
+        <section class="flat-section">
+          <h3 class="flat-title">Ghi nhật ký công việc sửa chữa</h3>
+          <form id="maintenance-form" class="stack">
+            <div class="field">
+              <label class="label" for="log-ha-tang">Hạ tầng</label>
+              <select id="log-ha-tang" name="ha_tang" required></select>
+            </div>
+            <div class="field">
+              <label class="label" for="log-su-co">Sự cố liên quan (tùy chọn)</label>
+              <select id="log-su-co" name="su_co">
+                <option value="">Không gắn sự cố</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="label" for="log-tien-do">Tiến độ</label>
+              <select id="log-tien-do" name="tien_do" required>
+                <option value="chua_xu_ly">Chưa xử lý</option>
+                <option value="dang_xu_ly">Đang xử lý</option>
+                <option value="hoan_thanh">Đã hoàn thành</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="label" for="log-noi-dung">Nội dung nhật ký</label>
+              <textarea id="log-noi-dung" name="noi_dung" placeholder="Mô tả công việc đã thực hiện..." required></textarea>
+            </div>
+            <div class="topbar-actions">
+              <button class="btn btn-primary" type="submit">Lưu nhật ký</button>
+            </div>
+          </form>
+          <div class="separator"></div>
+          <div id="maintenance-list" class="stack"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <script src="/static/js/technical/dashboard.js"></script>
+</body>
+</html>

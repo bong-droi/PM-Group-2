@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operator Dashboard</title>
+  <link rel="stylesheet" href="/static/css/ekgis-theme.css" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">O</div>
+        <div>
+          <p class="brand-title">Dashboard Điều hành</p>
+          <p class="brand-subtitle">Tiếp nhận, phân luồng và giám sát xử lý sự cố hạ tầng</p>
+        </div>
+      </div>
+      <div class="role-nav-wrap">
+        <button class="role-nav-btn role-nav-active" data-section="overview" type="button">Trang chủ tổng quan</button>
+        <button class="role-nav-btn" data-section="infrastructure" type="button">Hạ tầng thời gian thực</button>
+        <button class="role-nav-btn" data-section="incidents" type="button">Cảnh báo & sự cố</button>
+        <button id="logout-btn" class="btn btn-danger">Đăng xuất</button>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+      <section id="overview-section" class="container">
+        <section class="flat-section">
+          <h2 class="flat-title">Trang chủ tổng quan</h2>
+          <p id="welcome-text" class="flat-note">Đang tải dữ liệu người dùng...</p>
+          <h3 class="flat-title" style="font-size: 1rem; margin-top: 8px;">Thông báo sự cố</h3>
+          <div id="operator-notification-list" class="stack" style="margin-bottom: 12px;"></div>
+          <div class="flat-stats">
+            <div class="flat-stat">
+              <p>Thiết bị hoạt động</p>
+              <p id="metric-active" class="v">0</p>
+            </div>
+            <div class="flat-stat">
+              <p>Thiết bị hỏng/bảo trì</p>
+              <p id="metric-issue" class="v">0</p>
+            </div>
+            <div class="flat-stat">
+              <p>Sự cố chưa xác nhận</p>
+              <p id="metric-pending" class="v">0</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section id="infrastructure-section" class="container hidden" style="margin-top: 16px;">
+        <section class="flat-section">
+          <h3 class="flat-title">Theo dõi tình trạng hạ tầng theo thời gian thực</h3>
+          <div id="operator-map" style="height: 520px; margin-top: 10px;"></div>
+          <div class="separator"></div>
+          <div id="asset-status-list" class="stack"></div>
+        </section>
+      </section>
+
+      <section id="incidents-section" class="container hidden" style="margin-top: 16px;">
+        <section class="flat-section">
+          <h3 class="flat-title">Danh sách cảnh báo và sự cố</h3>
+          <p class="flat-note">Xác nhận báo cáo và phân công cho kỹ thuật viên.</p>
+          <div id="incident-operator-list" class="stack"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script src="/static/js/operator/dashboard.js"></script>
+</body>
+</html>

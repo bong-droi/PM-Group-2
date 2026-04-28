@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cổng đô thị số | Giới thiệu</title>
+  <link rel="stylesheet" href="/static/css/ekgis-theme.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">GIS</div>
+        <div>
+          <p class="brand-title">Nền tảng Quản lý Đô thị Thông minh</p>
+          <p class="brand-subtitle">Bản đồ số thống nhất cho vận hành hạ tầng kỹ thuật</p>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button id="open-login-btn" class="btn btn-outline" type="button">Đăng nhập</button>
+        <button id="open-register-btn" class="btn btn-primary" type="button">Đăng ký</button>
+      </div>
+    </header>
+
+    <main class="container landing-main">
+      <section class="panel panel-padding hero-panel">
+        <h1>Ứng dụng GIS trong quản lý đô thị</h1>
+        <p>Giải pháp trực quan dữ liệu không gian, điều phối vận hành liên thông và ra quyết định dựa trên bản đồ số thống nhất.</p>
+        <p>Hệ thống phục vụ quản lý hạ tầng kỹ thuật, tiếp nhận phản ánh cộng đồng, theo dõi xử lý sự cố và phân quyền theo từng vai trò vận hành.</p>
+        <div class="pill-list">
+          <span class="pill">Quản lý hạ tầng</span>
+          <span class="pill">Giám sát sự cố</span>
+          <span class="pill">Điều phối kỹ thuật</span>
+          <span class="pill">Phản ánh công dân</span>
+        </div>
+      </section>
+
+      <section class="feature-grid">
+        <article class="panel panel-padding">
+          <h2 class="section-title" style="font-size:1.15rem;">Bản đồ số tập trung</h2>
+          <p class="section-note">Tổng hợp dữ liệu tài sản đô thị trên một nền tảng thống nhất để tra cứu và phân tích nhanh.</p>
+        </article>
+        <article class="panel panel-padding">
+          <h2 class="section-title" style="font-size:1.15rem;">Vận hành theo quy trình</h2>
+          <p class="section-note">Tiếp nhận, phân luồng và xử lý sự cố theo mức độ ưu tiên và vị trí thực tế ngoài hiện trường.</p>
+        </article>
+        <article class="panel panel-padding">
+          <h2 class="section-title" style="font-size:1.15rem;">Phục vụ cộng đồng</h2>
+          <p class="section-note">Người dân gửi phản ánh và theo dõi tiến độ xử lý minh bạch theo thời gian thực.</p>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="auth-modal" class="auth-modal hidden" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
+    <div class="auth-backdrop" id="auth-close-backdrop"></div>
+    <section class="auth-dialog panel panel-padding">
+      <div class="auth-dialog-header">
+        <h2 id="auth-modal-title" class="section-title">Đăng nhập hệ thống</h2>
+        <button id="auth-close-btn" class="btn btn-outline" type="button">Đóng</button>
+      </div>
+
+      <form id="login-form" class="stack auth-form" autocomplete="on">
+        <div class="field">
+          <label class="label" for="login-username">Tên đăng nhập</label>
+          <input id="login-username" type="text" name="username" placeholder="Nhập tên đăng nhập" required />
+        </div>
+        <div class="field">
+          <label class="label" for="login-password">Mật khẩu</label>
+          <input id="login-password" type="password" name="password" placeholder="Nhập mật khẩu" required />
+        </div>
+        <button class="btn btn-primary" type="submit">Đăng nhập</button>
+      </form>
+
+      <form id="register-form" class="stack auth-form hidden">
+        <div class="field">
+          <label class="label" for="reg-username">Tên đăng nhập mới</label>
+          <input id="reg-username" name="username" placeholder="Ví dụ: congdan01" required />
+        </div>
+        <div class="field">
+          <label class="label" for="reg-email">Email</label>
+          <input id="reg-email" type="email" name="email" placeholder="example@email.com" />
+        </div>
+        <div class="field">
+          <label class="label" for="reg-password">Mật khẩu</label>
+          <input id="reg-password" type="password" name="password" placeholder="Tối thiểu 8 ký tự" required />
+        </div>
+        <button class="btn btn-primary" type="submit">Đăng ký</button>
+      </form>
+
+      <p id="auth-message" class="message"></p>
+    </section>
+  </div>
+
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>

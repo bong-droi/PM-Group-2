@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/static/css/ekgis-theme.css" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div>
+          <p class="brand-title">Dashboard Quản trị hệ thống</p>
+        </div>
+      </div>
+      <div class="role-nav-wrap">
+        <button class="role-nav-btn role-nav-active" data-section="overview" type="button">Trang chủ tổng quan</button>
+        <button class="role-nav-btn" data-section="assets" type="button">Quản lý hạ tầng</button>
+        <button class="role-nav-btn" data-section="users" type="button">Người dùng & phân quyền</button>
+        <button id="logout-btn" class="btn btn-danger" type="button">Đăng xuất</button>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+      <section id="overview-section" class="container">
+        <div class="dashboard-grid">
+          <section class="panel panel-padding">
+            <div class="hero-card">
+              <h2>Trang chủ tổng quan Admin</h2>
+              <p id="welcome-text">Đang tải dữ liệu người dùng...</p>
+            </div>
+            <div style="margin-top: 12px;">
+              <h3 class="section-title" style="font-size: 1rem; margin-bottom: 8px;">Thông báo sự cố</h3>
+              <div id="admin-notification-list" class="stack"></div>
+            </div>
+            <div class="metric-grid" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
+              <article class="metric">
+                <p class="metric-label">Số kỹ thuật viên (tech)</p>
+                <p id="metric-tech-count" class="metric-value">0</p>
+              </article>
+              <article class="metric">
+                <p class="metric-label">Số vận hành (operator)</p>
+                <p id="metric-operator-count" class="metric-value">0</p>
+              </article>
+              <article class="metric">
+                <p class="metric-label">Số công dân (citizen)</p>
+                <p id="metric-citizen-count" class="metric-value">0</p>
+              </article>
+              <article class="metric">
+                <p class="metric-label">Tổng số sự cố đã có</p>
+                <p id="metric-incident-total" class="metric-value">0</p>
+              </article>
+              <article class="metric">
+                <p class="metric-label">Sự cố đã được xử lý</p>
+                <p id="metric-incident-done" class="metric-value">0</p>
+              </article>
+              <article class="metric">
+                <p class="metric-label">Sự cố đang xử lý</p>
+                <p id="metric-incident-processing" class="metric-value">0</p>
+              </article>
+            </div>
+          </section>
+          <aside class="right-stack">
+            
+            
+          </aside>
+        </div>
+      </section>
+
+      <section id="assets-section" class="container hidden" style="margin-top: 18px;">
+        <section class="panel panel-padding">
+          <h3 class="section-title" style="font-size:1.15rem;">Quản lý dữ liệu hạ tầng </h3>
+          <div class="topbar-actions" style="margin-bottom: 10px;">
+            <button id="asset-clear-geometry-btn" class="btn btn-outline" type="button">Xóa vị trí đã chọn</button>
+          </div>
+          <div id="asset-map-admin" style="height: 500px; margin-bottom: 12px;"></div>
+          <form id="asset-form" class="stack">
+            <input type="hidden" name="id" />
+            <div class="field">
+              <label class="label" for="asset-ten">Tên hạ tầng</label>
+              <input id="asset-ten" name="ten" placeholder="Nhập tên hạ tầng" required />
+            </div>
+            <div class="field">
+              <label class="label" for="asset-loai">Loại hạ tầng</label>
+              <select id="asset-loai" name="loai" required></select>
+            </div>
+            <div class="field">
+              <label class="label" for="asset-trang-thai">Trạng thái</label>
+              <select id="asset-trang-thai" name="trang_thai" required></select>
+            </div>
+            <div class="field">
+              <label class="label" for="asset-ngay-lap-dat">Ngày lắp đặt</label>
+              <input id="asset-ngay-lap-dat" type="date" name="ngay_lap_dat" />
+            </div>
+            <div class="field">
+              <label class="label" for="asset-nsx">Nhà sản xuất</label>
+              <input id="asset-nsx" name="nha_san_xuat" placeholder="Nhà sản xuất" />
+            </div>
+            <div class="field">
+              <label class="label" for="asset-lat">Vĩ độ</label>
+              <input id="asset-lat" name="vi_tri_lat" placeholder="Ví dụ: 10.7769" />
+            </div>
+            <div class="field">
+              <label class="label" for="asset-lng">Kinh độ</label>
+              <input id="asset-lng" name="vi_tri_lng" placeholder="Ví dụ: 106.7009" />
+            </div>
+            <div class="field">
+              <label class="label" for="asset-ghi-chu">Ghi chú</label>
+              <textarea id="asset-ghi-chu" name="ghi_chu" placeholder="Ghi chú thêm"></textarea>
+            </div>
+            <div class="topbar-actions">
+              <button class="btn btn-primary" type="submit">Lưu hạ tầng</button>
+              <button class="btn btn-outline" id="asset-reset-btn" type="button">Nhập mới</button>
+            </div>
+          </form>
+          <div class="separator"></div>
+          <div id="asset-list-admin" class="stack"></div>
+        </section>
+      </section>
+
+      <section id="users-section" class="container hidden" style="margin-top: 18px;">
+        <section class="panel panel-padding">
+          <h3 class="section-title" style="font-size:1.15rem;">Quản lý người dùng và phân quyền</h3>
+          <div class="user-management-grid">
+            <div>
+              <div class="stack" style="margin-bottom: 12px;">
+                <div class="field">
+                  <label class="label" for="user-search-input">Tìm kiếm theo tên tài khoản</label>
+                  <input id="user-search-input" type="text" placeholder="Nhập username..." />
+                </div>
+                <div class="field">
+                  <label class="label" for="user-sort-select">Sắp xếp</label>
+                  <select id="user-sort-select">
+                    <option value="name_asc">Tên A-Z</option>
+                    <option value="name_desc">Tên Z-A</option>
+                    <option value="role_asc">Role A-Z</option>
+                    <option value="role_desc">Role Z-A</option>
+                  </select>
+                </div>
+              </div>
+              <div id="user-list-admin" class="stack"></div>
+            </div>
+
+            <div>
+              <form id="user-form" class="stack">
+                <input type="hidden" name="id" />
+                <div class="field">
+                  <label class="label" for="user-username">Tên đăng nhập</label>
+                  <input id="user-username" name="username" placeholder="Username" required />
+                </div>
+                <div class="field">
+                  <label class="label" for="user-email">Email</label>
+                  <input id="user-email" type="email" name="email" placeholder="Email" />
+                </div>
+                <div class="field">
+                  <label class="label" for="user-ho-ten">Họ và tên</label>
+                  <input id="user-ho-ten" name="ho_ten" placeholder="Họ và tên" />
+                </div>
+                <div class="field">
+                  <label class="label" for="user-ngay-sinh">Ngày tháng năm sinh</label>
+                  <input id="user-ngay-sinh" type="date" name="ngay_sinh" />
+                </div>
+                <div class="field">
+                  <label class="label" for="user-gioi-tinh">Giới tính</label>
+                  <select id="user-gioi-tinh" name="gioi_tinh">
+                    <option value="">Chọn giới tính</option>
+                    <option value="nam">Nam</option>
+                    <option value="nu">Nữ</option>
+                    <option value="khac">Khác</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="label" for="user-dia-chi">Địa chỉ</label>
+                  <textarea id="user-dia-chi" name="dia_chi" placeholder="Địa chỉ"></textarea>
+                </div>
+                <div class="field">
+                  <label class="label" for="user-password">Mật khẩu</label>
+                  <input id="user-password" type="password" name="password" placeholder="Để trống nếu không đổi" />
+                </div>
+                <div class="field">
+                  <label class="label" for="user-role">Vai trò</label>
+                  <select id="user-role" name="vai_tro" required>
+                    <option value="admin">Admin</option>
+                    <option value="operator">Operator</option>
+                    <option value="technical">Technical</option>
+                    <option value="citizen">Citizen</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="label" for="user-phone">Số điện thoại</label>
+                  <input id="user-phone" name="so_dien_thoai" placeholder="Số điện thoại" />
+                </div>
+                <div class="topbar-actions">
+                  <button class="btn btn-primary" type="submit">Lưu người dùng</button>
+                  <button class="btn btn-outline" id="user-reset-btn" type="button">Nhập mới</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script src="/static/js/admin/dashboard.js"></script>
+</body>
+</html>
